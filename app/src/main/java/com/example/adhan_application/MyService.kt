@@ -9,6 +9,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,19 +33,25 @@ class MyService : Service() {
 
 
         val c = Calendar.getInstance()
-        val format= SimpleDateFormat("HH")
-        val format1= SimpleDateFormat("mm")
-        val format2= SimpleDateFormat("ss")
-        val heure= format.format(c.time).toString()
-        val minute= format1.format(c.time).toString()
-        val second= format2.format(c.time).toString()
-               // && (second=="00")
+        val format= SimpleDateFormat("HH:mm")
+        val heur= format.format(c.time).toString().trim()
+        Log.d("TIME", heur)
 
         val notificationIntent = Intent(this, MainActivity::class.java)
 
         t.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
-                if ((Calendar.getInstance().time.hours==alarmHour) && (Calendar.getInstance().time.minutes == alarmMinute) ) {
+
+                //For test with time picker
+                if (((Calendar.getInstance().time.hours==alarmHour) && (Calendar.getInstance().time.minutes == alarmMinute))
+                or ((Calendar.getInstance().time.hours==4) && (Calendar.getInstance().time.minutes == 10) && (Calendar.getInstance().time.seconds == 2))
+                    or ((Calendar.getInstance().time.hours==12) && (Calendar.getInstance().time.minutes == 42) && (Calendar.getInstance().time.seconds == 10))
+                or ((Calendar.getInstance().time.hours==16) && (Calendar.getInstance().time.minutes == 31) && (Calendar.getInstance().time.seconds == 45))
+                or ((Calendar.getInstance().time.hours==19) && (Calendar.getInstance().time.minutes == 39) && (Calendar.getInstance().time.seconds == 13))
+                or ((Calendar.getInstance().time.hours==21) && (Calendar.getInstance().time.minutes == 16) && (Calendar.getInstance().time.seconds == 3)))
+                {
+
+
                     //mp.start()
 
                     try {
@@ -53,7 +60,8 @@ class MyService : Service() {
                         val vibre = longArrayOf(500, 1000)
                         val notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
                             .setContentTitle("Prayer time") // title for notification
-                            .setContentText("Slat time - " + alarmHour!!.toString() + " : " + alarmMinute!!.toString())// message for notification
+                            .setContentText("Slat time - " + Calendar.getInstance().time.hours + " : " +
+                                    Calendar.getInstance().time.minutes)// message for notification
                             .setSmallIcon(R.drawable.ic_notifications) //small icon for notification
                             .setAutoCancel(true) // clear notification after click
                             .setContentIntent(pendingIntent) //open the app after click on notification
@@ -79,9 +87,11 @@ class MyService : Service() {
                     }
                 } else {
                     mp!!.stop()
+
                 }
 
             }
+
         }, 0, 2000)
 
         return START_STICKY                    //Redémarré après terminaison. Indépendant des intents

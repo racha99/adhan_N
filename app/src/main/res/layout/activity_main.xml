@@ -5,11 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-<TimePicker
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    android:id="@+id/timePicker"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"/>
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="253dp"
+        android:layout_marginBottom="125dp">
+
+        <ListView
+            android:id="@+id/time_listView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="343dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="11dp">
+
+        <TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="400dp"
+            android:layout_height="362dp"
+            android:layout_marginEnd="-161dp"
+            android:layout_marginBottom="-358dp" />
+    </LinearLayout>
 
 </RelativeLayout>

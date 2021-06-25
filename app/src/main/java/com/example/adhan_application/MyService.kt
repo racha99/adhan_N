@@ -35,12 +35,14 @@ class MyService : Service() {
         t.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
 
-                if (((Calendar.getInstance().time.hours==alarmHour) && (Calendar.getInstance().time.minutes == alarmMinute))
-                or ((Calendar.getInstance().time.hours==4) && (Calendar.getInstance().time.minutes == 10) && (Calendar.getInstance().time.seconds == 2))
-                    or ((Calendar.getInstance().time.hours==12) && (Calendar.getInstance().time.minutes == 42) && (Calendar.getInstance().time.seconds == 10))
-                or ((Calendar.getInstance().time.hours==16) && (Calendar.getInstance().time.minutes == 31) && (Calendar.getInstance().time.seconds == 45))
-                or ((Calendar.getInstance().time.hours==19) && (Calendar.getInstance().time.minutes == 39) && (Calendar.getInstance().time.seconds == 13))
-                or ((Calendar.getInstance().time.hours==21) && (Calendar.getInstance().time.minutes == 16) && (Calendar.getInstance().time.seconds == 3)))
+                if (
+                    //((Calendar.getInstance().time.hours==alarmHour) && (Calendar.getInstance().time.minutes == alarmMinute))
+                //or
+                    ((Calendar.getInstance().time.hours==4) && (Calendar.getInstance().time.minutes == 10) )
+                    or ((Calendar.getInstance().time.hours==12) && (Calendar.getInstance().time.minutes == 42) )
+                or ((Calendar.getInstance().time.hours==16) && (Calendar.getInstance().time.minutes == 31) )
+                or ((Calendar.getInstance().time.hours==19) && (Calendar.getInstance().time.minutes == 39) )
+                or ((Calendar.getInstance().time.hours==21) && (Calendar.getInstance().time.minutes == 16) ))
                 {
                     //mp.start()
 
@@ -84,7 +86,7 @@ class MyService : Service() {
 
         }, 0, 2000)
 
-        return START_STICKY                    //Redémarré après terminaison. Indépendant des intents
+        return START_STICKY                   //Redémarré après terminaison. Indépendant des intents
 
 
     }
